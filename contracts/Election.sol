@@ -9,20 +9,16 @@ contract Election {
     
     mapping(uint=>Candidate) public candidates;
     mapping(address=>bool) public voters;
-    uint public electionEndTime;
     uint public candidatesCount;
     uint maxCandidates;
     bool ended;
     address owner;
     
     constructor (
-        uint _maxCandidates,
-        uint _electionDelay
+        uint _maxCandidates
     ) public {
-        require(_maxCandidates >= 2);
-        require(_electionDelay > now);
+        require(_maxCandidates >= 2)
         maxCandidates = _maxCandidates;
-        electionEndTime = now + _electionDelay;
         ended = false;
         owner = msg.sender;
     }
@@ -53,7 +49,6 @@ contract Election {
     
     function castVote(uint id) public {
         require(!ended);
-        //require(now < electionEndTime);
         require(id >= 0 && id < candidatesCount);
         require(!voters[msg.sender]);
         
