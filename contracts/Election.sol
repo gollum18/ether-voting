@@ -17,7 +17,7 @@ contract Election {
     constructor (
         uint _maxCandidates
     ) public {
-        require(_maxCandidates >= 2)
+        require(_maxCandidates >= 2);
         maxCandidates = _maxCandidates;
         ended = false;
         owner = msg.sender;
@@ -38,8 +38,8 @@ contract Election {
         require(msg.sender == owner);
         require(candidatesCount < maxCandidates);
         
-        candidates[candidatesCount] = Candidate(candidatesCount, name, 0);
         candidatesCount++;
+        candidates[candidatesCount] = Candidate(candidatesCount, name, 0);
         emit NewCandidate(
             candidates[candidatesCount-1].id, 
             candidates[candidatesCount-1].name, 
