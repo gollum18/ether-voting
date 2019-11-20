@@ -53,7 +53,7 @@ contract Election {
     
     function castVote(uint id) public {
         require(!ended);
-        require(now < electionEndTime);
+        //require(now < electionEndTime);
         require(id >= 0 && id < candidatesCount);
         require(!voters[msg.sender]);
         
