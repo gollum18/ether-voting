@@ -12,7 +12,7 @@ App = {
       App.web3Provider = new Web3(ethereum);
       web3.setProvider(App.web3Provider);
       try {
-        await ethereum.enable();
+        ethereum.enable();
       } catch (error) {
         console.warn(error);
       }
