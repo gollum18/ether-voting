@@ -44,7 +44,7 @@ contract Election {
     // Step 8: Declare a method for adding candidates to the contract
     function addCandidate(string memory name) public {
         require(!ended);
-        require(msg.sender == owner);
+        //require(msg.sender == owner);
         require(candidatesCount < maxCandidates);
         
         candidatesCount++;
