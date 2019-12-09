@@ -45,7 +45,7 @@ contract Election {
     function addCandidate(string memory name) public {
         require(!ended);
         require(msg.sender == owner);
-        require(candidatesCount < maxCandidates);
+        require(candidatesCount <= maxCandidates);
         
         candidatesCount++;
         candidates[candidatesCount] = Candidate(candidatesCount, name, 0);
@@ -59,6 +59,7 @@ contract Election {
     // Step 9: Declare a method allowing people to vote on candidates.
     function castVote(uint id) public {
         require(!ended);
+        require(id > 0 && id <= candidatesCount);
         require(!voters[msg.sender]);
         
         voters[msg.sender] = true;
@@ -74,20 +75,20 @@ contract Election {
     
     // Step 11: Declare a getter function for retrieving candidate information
     function getCandidate(uint id) public view returns (uint, string memory, uint) {
-        require(id >= 0 && id < candidatesCount);
+        require(id > 0 && id <= candidatesCount);
         Candidate memory candidate = candidates[id];
         return (candidate.id, candidate.name, candidate.votes);
     }
     
     // Step 12: Declare a getter function for retrieving a candidates name
     function getName(uint id) public view returns (string memory) {
-        require(id >= 0 && id < candidatesCount);
+        require(id > 0 && id <= candidatesCount);
         return candidates[id].name;
     }
     
     // Step 13: Declare a getter function for getting a candidates votes
     function getVotes(uint id) public view returns (uint) {
-        require(id >= 0 && id < candidatesCount);
+        require(id > 0 && id <= candidatesCount);
         return candidates[id].votes;
     }
 }
