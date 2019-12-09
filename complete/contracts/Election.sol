@@ -45,7 +45,7 @@ contract Election {
     function addCandidate(string memory name) public {
         require(!ended);
         require(msg.sender == owner);
-        require(candidatesCount <= maxCandidates);
+        require(candidatesCount < maxCandidates);
         
         candidatesCount++;
         candidates[candidatesCount] = Candidate(candidatesCount, name, 0);
